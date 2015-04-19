@@ -29,7 +29,7 @@ namespace Web
                 if((DateTime.Now - LastTime) > TimeSpan.FromSeconds(10))
                 {
                     LastTime = DateTime.Now;
-                    StoreOperationResult storeResults = (StoreOperationResult)mc.ExecuteStore(StoreMode.Set, "foo", LastTime.ToShortTimeString());
+                    StoreOperationResult storeResults = (StoreOperationResult)mc.ExecuteStore(StoreMode.Set, "foo", LastTime.ToLongTimeString());
                 }
                 GetOperationResult getResults = (GetOperationResult)mc.ExecuteGet("foo");
 
