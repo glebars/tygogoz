@@ -14,7 +14,7 @@ namespace Web
         {
             btnstuff.Click += (s, args) => {
                 var melClient = new SmtpClient();
-                melClient.Send("Tygogoz", "glebars@jadeworld.com; glebars@gmail.com", "Bienvenue tygogoz", "contenu de test");
+                melClient.Send("postman@tygogoz.apphb.com", "glebars@jadeworld.com; glebars@gmail.com", "Bienvenue tygogoz", "contenu de test");
             };
         }
     }
