@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Enyim.Caching;
+using Enyim.Caching.Memcached;
+using Enyim.Caching.Memcached.Results;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
@@ -12,9 +15,21 @@ namespace Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            btnstuff.Click += (s, args) => {
+            btnstuff.Click += (s, args) =>
+            {
                 var melClient = new SmtpClient();
-                melClient.Send("postman@tygogoz.apphb.com", "glebars@jadeworld.com; glebars@gmail.com", "Bienvenue tygogoz", "contenu de test");
+                melClient.Send("postman@tygogoz.apphb.com", "glebars@gmail.com", "Bienvenue tygogoz", "contenu de test");
+            };
+
+            btnTestCache.Click += (s, args) =>
+            {
+                MemcachedClient mc = new MemcachedClient();
+                StoreOperationResult storeResults = (StoreOperationResult)mc.ExecuteStore(StoreMode.Set, "foo", "bar");
+
+                GetOperationResult getResults = (GetOperationResult)mc.ExecuteGet("foo");
+
+                lblTestCache.Text = getResults.Value.ToString();
+
             };
         }
     }

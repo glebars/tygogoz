@@ -9,7 +9,9 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    <asp:Button runat="server" ID="btnstuff"  Text="click"/>
+        <asp:Button runat="server" ID="btnstuff"  Text="send mail"/>
+        <asp:Button runat="server" ID="btnTestCache"  Text="test cache"/>
+        <asp:Label runat ="server" ID="lblTestCache" Text="..." />
     </div>
     </form>
 </body>
