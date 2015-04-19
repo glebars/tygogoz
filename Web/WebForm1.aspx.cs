@@ -13,6 +13,8 @@ namespace Web
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+        static DateTime LastTime = DateTime.MinValue;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             btnstuff.Click += (s, args) =>
@@ -24,8 +26,11 @@ namespace Web
             btnTestCache.Click += (s, args) =>
             {
                 MemcachedClient mc = new MemcachedClient();
-                StoreOperationResult storeResults = (StoreOperationResult)mc.ExecuteStore(StoreMode.Set, "foo", "bar");
-
+                if((DateTime.Now - LastTime) > TimeSpan.FromSeconds(10))
+                {
+                    LastTime = DateTime.Now;
+                    StoreOperationResult storeResults = (StoreOperationResult)mc.ExecuteStore(StoreMode.Set, "foo", LastTime.ToShortTimeString());
+                }
                 GetOperationResult getResults = (GetOperationResult)mc.ExecuteGet("foo");
 
                 lblTestCache.Text = getResults.Value.ToString();
